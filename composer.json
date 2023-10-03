@@ -1,0 +1,24 @@
+{
+    "name": "losthost/swanctl-model",
+    "description": "Data model for controlling StrongSwan VPN Server(s)",
+    "authors": [
+        {
+            "name": "drweb",
+            "email": "pio@pio.su"
+        }
+    ],
+    
+    "autoload": {
+        "psr-4": {
+            "losthost\\swanctlModel\\": "src/"
+        }
+    },
+    
+    "require": {
+        "losthost/db": "dev-main",
+        "losthost/passg": "^v1.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "10.3.5"
+    }
+}
