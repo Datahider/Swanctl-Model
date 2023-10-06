@@ -1,3 +1,4 @@
 /etc/
 /tests/.phpunit.result.cache
 /nbproject/
+/vendor/

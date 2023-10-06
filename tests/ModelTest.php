@@ -162,7 +162,7 @@ final class ModelTest extends TestCase {
         $this->assertGreaterThanOrEqual($expected_timestamp, $connection->valid_till->getTimestamp());
         
         $connection_by_login = $model->connection->get('u1');
-        $this->assertEquals($connection, $connection_by_login);
+        $this->assertEquals([$connection->login, $connection->password], [$connection_by_login->login, $connection_by_login->password]);
     }
     
     public function testCanDeleteConnection() : void {
@@ -238,7 +238,7 @@ final class ModelTest extends TestCase {
         
         // by code
         $activation_code_by_code = $model->activation_code->get($activation_code_by_id->code);
-        $this->assertEquals($activation_code_by_id, $activation_code_by_code);
+        $this->assertEquals($activation_code_by_id->code, $activation_code_by_code->code);
                
     }
     

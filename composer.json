@@ -15,7 +15,7 @@
     },
     
     "require": {
-        "losthost/db": "dev-main",
+        "losthost/db": "^1.6.2",
         "losthost/passg": "^v1.1.0"
     },
     "require-dev": {
