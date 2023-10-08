@@ -102,6 +102,22 @@ final class ModelTest extends TestCase {
         $this->assertSame(2, (int)$user2->id);
     }
     
+    public function testCanGetUserByIntegrationId() : void {
+        $model = Model::getModel();
+        $user = $model->user->get(1);
+        $user->integration_id = 87654321;
+        $user->write();
+        
+        $integration_user = $model->user->getIntegrationUser(87654321);
+        $this->assertEquals($user->id, $integration_user->id);
+    }
+
+    public function testCanGetFalseIfWrongIntegrationUser() {
+        $model = Model::getModel();
+        $user = $model->user->getIntegrationUser(88888888);
+        $this->assertFalse($user);
+    }
+
     public function testDeleteUser() : void {
         $model = Model::getModel();
         $user = $model->user->get(1);

@@ -40,6 +40,15 @@ class User {
         return $user;
     }
     
+    public function getIntegrationUser(int $integration_id) {
+        try {
+            $user = new data\DBUser('integration_id = ?', $integration_id);
+        } catch (\Exception $ex) {
+            $user = false;
+        }
+        return $user;
+    }
+    
     public function list(string $condition=null, mixed $param=null, string|null $order_by=null, ?string $sort=null, int $limit=25, int $start=0) {
 
         $sql = "SELECT id FROM [swanctl_users] ";
