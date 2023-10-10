@@ -36,27 +36,27 @@ class Model {
     }
     
     public function connectionStatus() {
-        return \losthost\DB\DB::$pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS);
+        return \losthost\DB\DB::PDO()->getAttribute(\PDO::ATTR_CONNECTION_STATUS);
     }
     
     public function query($sql) {
-        return \losthost\DB\DB::$pdo->query($sql);
+        return \losthost\DB\DB::PDO()->query($sql);
     }
     
     public function prepare($sql) {
-        return \losthost\DB\DB::$pdo->prepare($sql);
+        return \losthost\DB\DB::PDO()->prepare($sql);
     }
     
     public function beginTransaction() {
-        \losthost\DB\DB::$pdo->beginTransaction();
+        \losthost\DB\DB::beginTransaction();
     }
     
     public function commit() {
-        \losthost\DB\DB::$pdo->commit();
+        \losthost\DB\DB::commit();
     }
     
     public function rollBack() {
-        \losthost\DB\DB::$pdo->rollBack();
+        \losthost\DB\DB::rollBack();
     }
     
     public function now(bool $as_string=false) {

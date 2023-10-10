@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12e22ee42ca543b76e1fae305a4dd781",
+    "content-hash": "f355705100d2e56717d98cabebe22585",
     "packages": [
         {
             "name": "losthost/db",
-            "version": "v1.6.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Datahider/DB.git",
-                "reference": "8dbf40f73b9c914579989263cd1fca9a7775b847"
+                "reference": "93b7bb90743268a7d1c71ccb443d22182ae48c2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Datahider/DB/zipball/8dbf40f73b9c914579989263cd1fca9a7775b847",
-                "reference": "8dbf40f73b9c914579989263cd1fca9a7775b847",
+                "url": "https://api.github.com/repos/Datahider/DB/zipball/93b7bb90743268a7d1c71ccb443d22182ae48c2a",
+                "reference": "93b7bb90743268a7d1c71ccb443d22182ae48c2a",
                 "shasum": ""
             },
             "require": {
@@ -50,9 +50,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Datahider/DB/issues",
-                "source": "https://github.com/Datahider/DB/tree/v1.6.2"
+                "source": "https://github.com/Datahider/DB/tree/v2.0.0"
             },
-            "time": "2023-10-06T10:50:46+00:00"
+            "time": "2023-10-10T10:50:07+00:00"
         },
         {
             "name": "losthost/passg",
