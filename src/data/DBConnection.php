@@ -12,7 +12,7 @@ class DBConnection extends \losthost\DB\DBObject {
                 user bigint UNSIGNED NOT NULL,
                 login varchar(30),
                 password varchar(20) NOT NULL,
-                is_enabled tinyint NOT NULL,
+                is_enabled tinyint(1) NOT NULL,
                 valid_till DATETIME,
                 description varchar(1024) NOT NULL,
                 PRIMARY KEY (id),

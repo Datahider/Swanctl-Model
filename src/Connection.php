@@ -75,11 +75,17 @@ class Connection {
     public function prolong(data\DBConnection &$connection, string $code) {
         $model = Model::getModel();
         
+        data\DBActivationCodeEvent::initDataStructure();
         $db_code = new data\DBActivationCode('code = ? AND remain_activations > 0 AND valid_till >= ?', [$code, $model->now(true)], false);
         
         $model->beginTransaction();
         try {
-            $connection->valid_till = $connection->valid_till->add(date_interval_create_from_date_string("{$db_code->period_days} days"));
+            $now = date_create();
+            if ($now->getTimestamp() > $connection->valid_till->getTimestamp()) {
+                $connection->valid_till = $now->add(date_interval_create_from_date_string("{$db_code->period_days} days"));
+            } else {
+                $connection->valid_till = $connection->valid_till->add(date_interval_create_from_date_string("{$db_code->period_days} days"));
+            }
             $db_code->remain_activations = $db_code->remain_activations - 1;
             $db_event = new data\DBActivationCodeEvent();
             $db_event->code = $db_code->id;

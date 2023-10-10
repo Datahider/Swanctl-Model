@@ -268,6 +268,19 @@ final class ModelTest extends TestCase {
         $this->assertEquals($initial_expiration->add(date_interval_create_from_date_string("10 days")), $connection->valid_till);
     }
     
+    public function testProlongFromNowForOverdueConnections() : void {
+        $model = Model::getModel();
+        $code = $model->activation_code->get(1);
+        $connection = $model->connection->get(13);
+        $connection->valid_till = date_create()->sub(date_interval_create_from_date_string("7 days"));
+        $connection->is_enabled = false;
+        $connection->write();
+        
+        $model->connection->prolong($connection, $code->code);
+        $this->assertGreaterThanOrEqual(time()-2+86400*10, $connection->valid_till->getTimestamp());
+    }
+
+
     public function testCanNotActivateWrongCode() : void {
         
         $this->expectExceptionCode(-10002);
