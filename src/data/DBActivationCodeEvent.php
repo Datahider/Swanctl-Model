@@ -20,6 +20,7 @@ class DBActivationCodeEvent extends \losthost\DB\DBObject {
             CREATE TABLE IF NOT EXISTS %TABLE_NAME% (
                 id bigint UNSIGNED NOT NULL AUTO_INCREMENT,
                 code bigint UNSIGNED NOT NULL,
+                user bigint UNSIGNED NOT NULL,
                 event_datetime datetime NOT NULL,
                 event_type varchar(20) NOT NULL,
                 event_data varchar(20),

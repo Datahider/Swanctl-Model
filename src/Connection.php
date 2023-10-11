@@ -77,6 +77,7 @@ class Connection {
         
         data\DBActivationCodeEvent::initDataStructure();
         $db_code = new data\DBActivationCode('code = ? AND remain_activations > 0 AND valid_till >= ?', [$code, $model->now(true)], false);
+        $this->checkActivatedByUser($connection->user, $db_code->id);
         
         $model->beginTransaction();
         try {
@@ -89,6 +90,7 @@ class Connection {
             $db_code->remain_activations = $db_code->remain_activations - 1;
             $db_event = new data\DBActivationCodeEvent();
             $db_event->code = $db_code->id;
+            $db_event->user = $connection->user;
             $db_event->event_datetime = $model->now();
             $db_event->event_type = 'activation';
             $db_event->event_data = $connection->id;
@@ -99,6 +101,13 @@ class Connection {
         } catch (\Exception $exc) {
             $model->rollBack();
             throw $exc;
+        }
+    }
+    
+    protected function checkActivatedByUser(int $user_id, int $code_id) {
+        $activations = new \losthost\DB\DBView("SELECT id FROM [swanctl_activation_codes_log] WHERE code = ? AND user = ?", [$code_id, $user_id]);
+        if ($activations->next()) {
+            throw new \Exception("Already activated for the user.", -10003);
         }
     }
 }

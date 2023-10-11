@@ -36,6 +36,7 @@ class ActivationCode {
             $code->write();
             $code_event = new data\DBActivationCodeEvent();
             $code_event->code = $code->id;
+            $code_event->user = 0;
             $code_event->event_datetime = date_create();
             $code_event->event_type = 'creation';
             $code_event->event_data = $code->max_activations;

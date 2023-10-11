@@ -270,7 +270,7 @@ final class ModelTest extends TestCase {
     
     public function testProlongFromNowForOverdueConnections() : void {
         $model = Model::getModel();
-        $code = $model->activation_code->get(1);
+        $code = $model->activation_code->get(2);
         $connection = $model->connection->get(13);
         $connection->valid_till = date_create()->sub(date_interval_create_from_date_string("7 days"));
         $connection->is_enabled = false;
@@ -280,6 +280,14 @@ final class ModelTest extends TestCase {
         $this->assertGreaterThanOrEqual(time()-2+86400*10, $connection->valid_till->getTimestamp());
     }
 
+    public function testDisallowMultipleActivationsForSameCodeBySameUser() : void {
+        $model = Model::getModel();
+        $code = $model->activation_code->get(1);
+        $connection = $model->connection->get(14);
+        
+        $this->expectExceptionCode(-10003);
+        $model->connection->prolong($connection, $code->code);
+    }
 
     public function testCanNotActivateWrongCode() : void {
         
